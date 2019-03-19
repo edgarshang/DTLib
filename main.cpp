@@ -42,13 +42,38 @@ int Demo2()
 {
     try {
       //  throw Exception("test", __FILE__, __LINE__);
-        THROW_EXCEPTION(ArithmeticException, "test");
+        THROW_EXCEPTION(InvalidParameterException, "test");
     }
     catch (const ArithmeticException& e)
     {
             cout << "catch(const ArithmeticException& e)" << endl;
             cout << e.message() << endl;
             cout << e.location() << endl;
+    }
+    catch (const InvalidParameterException& e)
+    {
+            cout << "catch(const InvalidParameterException& e)" << endl;
+            cout << e.message() << endl;
+            cout << e.location() << endl;
+    }
+    catch(const IndexOutOfBoundException& e)
+    {
+        cout << "catch(const IndexOutOfBoundException& e)" << endl;
+        cout << e.message() << endl;
+        cout << e.location() << endl;
+    }
+    catch(const NoEnoughMemory& e)
+    {
+        cout << "catch(const NoEnoughMemory& e)" << endl;
+        cout << e.message() << endl;
+        cout << e.location() << endl;
+    }
+
+    catch(const NullPointerException& e)
+    {
+        cout << "catch(const NullPointerException& e)" << endl;
+        cout << e.message() << endl;
+        cout << e.location() << endl;
     }
     catch (const Exception& e)
     {

@@ -42,6 +42,78 @@ public:
         return *this;
     }
 };
+
+class NullPointerException : public Exception
+{
+public:
+    NullPointerException() : Exception(nullptr, nullptr, 0){}
+    NullPointerException(const char* message):Exception(message){}
+    NullPointerException(const char* file, int line) : Exception(file, line){}
+    NullPointerException(const char* message, const char* file, int line) : Exception(message, file, line){}
+
+    NullPointerException(const NullPointerException& e) : Exception(e){}
+    NullPointerException& operator= (const NullPointerException& e)
+    {
+        Exception::operator=(e);
+
+        return *this;
+    }
+
+};
+
+class IndexOutOfBoundException : public Exception
+{
+public:
+    IndexOutOfBoundException() : Exception(nullptr, nullptr, 0){}
+    IndexOutOfBoundException(const char* message):Exception(message){}
+    IndexOutOfBoundException(const char* file, int line) : Exception(file, line){}
+    IndexOutOfBoundException(const char* message, const char* file, int line) : Exception(message, file, line){}
+
+    IndexOutOfBoundException(const IndexOutOfBoundException& e) : Exception(e){}
+    IndexOutOfBoundException& operator= (const IndexOutOfBoundException& e)
+    {
+        Exception::operator=(e);
+
+        return *this;
+    }
+
+};
+
+class NoEnoughMemory : public Exception
+{
+public:
+    NoEnoughMemory() : Exception(nullptr, nullptr, 0){}
+    NoEnoughMemory(const char* message):Exception(message){}
+    NoEnoughMemory(const char* file, int line) : Exception(file, line){}
+    NoEnoughMemory(const char* message, const char* file, int line) : Exception(message, file, line){}
+
+    NoEnoughMemory(const NoEnoughMemory& e) : Exception(e){}
+    NoEnoughMemory& operator= (const NoEnoughMemory& e)
+    {
+        Exception::operator=(e);
+
+        return *this;
+    }
+
+};
+
+class InvalidParameterException : public Exception
+{
+public:
+    InvalidParameterException() : Exception(nullptr, nullptr, 0){}
+    InvalidParameterException(const char* message):Exception(message){}
+    InvalidParameterException(const char* file, int line) : Exception(file, line){}
+    InvalidParameterException(const char* message, const char* file, int line) : Exception(message, file, line){}
+
+    InvalidParameterException(const InvalidParameterException& e) : Exception(e){}
+    InvalidParameterException& operator= (const InvalidParameterException& e)
+    {
+        Exception::operator=(e);
+
+        return *this;
+    }
+
+};
 }
 
 
