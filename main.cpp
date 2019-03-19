@@ -1,10 +1,37 @@
 #include <iostream>
-#include "smartpointer.h"
+#include "Smartpointer.h"
 #include "Exception.h"
+#include "Object.h"
 
 
 using namespace std;
 using namespace DTLib;
+
+class TestObject : public Object
+{
+public:
+    int i;
+    int j;
+
+};
+
+class Child : public TestObject
+{
+public:
+    int k;
+};
+
+void Demo3()
+{
+    Object* obj1 = new TestObject();
+    Object* obj2 = new Child();
+
+    cout << "obj1 = " << obj1 << endl;
+    cout << "obj2 = " << obj2 << endl;
+
+    delete  obj1;
+    delete  obj2;
+}
 
 class Test
 {
@@ -88,9 +115,6 @@ int main()
 {
     cout << "Hello World!" << endl;
 
-    Demo1();
-    Demo2();
-
-    SmartPointer<Test> sp = new Test();
+    Demo3();
     return 0;
 }
