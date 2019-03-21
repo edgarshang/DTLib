@@ -113,8 +113,11 @@ int Demo2()
 }
 int main()
 {
-    cout << "Hello World!" << endl;
+//    SmartPointer<int> *sp = new SmartPointer<int>();
 
-    Demo3();
+//    delete  sp;
+//    Test *test = new Test();
+//    SmartPointer<Test> t1 = new Test();
+    SmartPointer<Exception> e1 = new ArithmeticException();
     return 0;
 }
