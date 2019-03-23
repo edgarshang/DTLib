@@ -2,6 +2,7 @@
 #include "Smartpointer.h"
 #include "Exception.h"
 #include "Object.h"
+#include "Seqlish.h"
 
 
 using namespace std;
@@ -113,11 +114,12 @@ int Demo2()
 }
 int main()
 {
+    SeqLish<int>* l;
 //    SmartPointer<int> *sp = new SmartPointer<int>();
 
 //    delete  sp;
 //    Test *test = new Test();
 //    SmartPointer<Test> t1 = new Test();
-    SmartPointer<Exception> e1 = new ArithmeticException();
+ //   SmartPointer<Exception> e1 = new ArithmeticException();
     return 0;
 }
