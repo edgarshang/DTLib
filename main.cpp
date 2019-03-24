@@ -118,37 +118,48 @@ int main()
 {
     Dynamiclish<int> l(5);
 
-    for (int i = 0; i < l.capacity(); i++) {
-        l.insert(0, i);
-
+    for(int i = 0; i < l.capacity(); i++)
+    {
+        l.insert(i);
     }
 
-    for (int i = 0; i < l.length(); i++) {
+    for(int i = 0; i < l.capacity(); i++)
+    {
         cout << l[i] << endl;
-
     }
 
-    l[0] *= l[0];
 
-    for (int i = 0; i < l.length(); i++) {
-        cout << l[i] << endl;
+//    for (int i = 0; i < l.capacity(); i++) {
+//        l.insert(0, i);
 
-    }
-    try {
-      l[5] = 5;
-    } catch (const Exception& e) {
-        cout << e.message() << endl;
-        cout << e.location() << endl;
+//    }
 
-        l.resize(10);
+//    for (int i = 0; i < l.length(); i++) {
+//        cout << l[i] << endl;
 
-        l.insert(5, 50);
+//    }
 
-    }
-    for (int i = 0; i < l.length(); i++) {
-        cout << l[i] << endl;
+//    l[0] *= l[0];
 
-    }
+//    for (int i = 0; i < l.length(); i++) {
+//        cout << l[i] << endl;
+
+//    }
+//    try {
+//      l[5] = 5;
+//    } catch (const Exception& e) {
+//        cout << e.message() << endl;
+//        cout << e.location() << endl;
+
+//        l.resize(10);
+
+//        l.insert(5, 50);
+
+//    }
+//    for (int i = 0; i < l.length(); i++) {
+//        cout << l[i] << endl;
+
+//    }
 
 
 //    SmartPointer<int> *sp = new SmartPointer<int>();

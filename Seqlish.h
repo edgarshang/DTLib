@@ -16,6 +16,11 @@ protected:
     int m_length;  // 当前线性表长度
 public:
 
+    bool insert(const T& e)
+    {
+        return insert(m_length, e);
+    }
+
     bool insert(int i, const T& e)
     {
         bool ret = ((0 <= i) && (i <= m_length));
