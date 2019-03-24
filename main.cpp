@@ -3,6 +3,8 @@
 #include "Exception.h"
 #include "Object.h"
 #include "Seqlish.h"
+#include "Staticlist.h"
+#include "Dynamiclist.h"
 
 
 using namespace std;
@@ -90,9 +92,9 @@ int Demo2()
         cout << e.message() << endl;
         cout << e.location() << endl;
     }
-    catch(const NoEnoughMemory& e)
+    catch(const NoEnoughMemoryException& e)
     {
-        cout << "catch(const NoEnoughMemory& e)" << endl;
+        cout << "catch(const NoEnoughMemoryException& e)" << endl;
         cout << e.message() << endl;
         cout << e.location() << endl;
     }
@@ -114,12 +116,46 @@ int Demo2()
 }
 int main()
 {
-    SeqLish<int>* l;
+    Dynamiclish<int> l(5);
+
+    for (int i = 0; i < l.capacity(); i++) {
+        l.insert(0, i);
+
+    }
+
+    for (int i = 0; i < l.length(); i++) {
+        cout << l[i] << endl;
+
+    }
+
+    l[0] *= l[0];
+
+    for (int i = 0; i < l.length(); i++) {
+        cout << l[i] << endl;
+
+    }
+    try {
+      l[5] = 5;
+    } catch (const Exception& e) {
+        cout << e.message() << endl;
+        cout << e.location() << endl;
+
+        l.resize(10);
+
+        l.insert(5, 50);
+
+    }
+    for (int i = 0; i < l.length(); i++) {
+        cout << l[i] << endl;
+
+    }
+
+
 //    SmartPointer<int> *sp = new SmartPointer<int>();
 
 //    delete  sp;
 //    Test *test = new Test();
 //    SmartPointer<Test> t1 = new Test();
- //   SmartPointer<Exception> e1 = new ArithmeticException();
+//    SmartPointer<Exception> e1 = new ArithmeticException();
     return 0;
 }

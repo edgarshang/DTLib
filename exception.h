@@ -82,16 +82,16 @@ public:
 
 };
 
-class NoEnoughMemory : public Exception
+class NoEnoughMemoryException : public Exception
 {
 public:
-    NoEnoughMemory() : Exception(nullptr, nullptr, 0){}
-    NoEnoughMemory(const char* message):Exception(message){}
-    NoEnoughMemory(const char* file, int line) : Exception(file, line){}
-    NoEnoughMemory(const char* message, const char* file, int line) : Exception(message, file, line){}
+    NoEnoughMemoryException() : Exception(nullptr, nullptr, 0){}
+    NoEnoughMemoryException(const char* message):Exception(message){}
+    NoEnoughMemoryException(const char* file, int line) : Exception(file, line){}
+    NoEnoughMemoryException(const char* message, const char* file, int line) : Exception(message, file, line){}
 
-    NoEnoughMemory(const NoEnoughMemory& e) : Exception(e){}
-    NoEnoughMemory& operator= (const NoEnoughMemory& e)
+    NoEnoughMemoryException(const NoEnoughMemoryException& e) : Exception(e){}
+    NoEnoughMemoryException& operator= (const NoEnoughMemoryException& e)
     {
         Exception::operator=(e);
 
