@@ -5,7 +5,7 @@
 #include "Seqlish.h"
 #include "Staticlist.h"
 #include "Dynamiclist.h"
-
+#include "staticarray.h"
 
 using namespace std;
 using namespace DTLib;
@@ -68,6 +68,8 @@ void Demo1()
     }
 }
 
+
+
 int Demo2()
 {
     try {
@@ -114,19 +116,32 @@ int Demo2()
 
     return 0;
 }
+
+void demo_staticArray()
+{
+    cout << "start" << endl;
+    StaticArray<int, 5> s1;
+
+    cout << "s1.length() = " << s1.length() << endl;
+    for (int i = 0; i < s1.length(); i++)
+    {
+
+        s1[i] = i*i;
+
+    }
+
+    for (int i = 0; i < s1.length(); i++)
+    {
+        cout << s1[i] << endl;
+    }
+
+    cout << "end" << endl;
+}
+
 int main()
 {
-    Dynamiclish<int> l(5);
-
-    for(int i = 0; i < l.capacity(); i++)
-    {
-        l.insert(i);
-    }
-
-    for(int i = 0; i < l.capacity(); i++)
-    {
-        cout << l[i] << endl;
-    }
+    cout << "hello" << endl;
+    demo_staticArray();
 
 
 //    for (int i = 0; i < l.capacity(); i++) {
