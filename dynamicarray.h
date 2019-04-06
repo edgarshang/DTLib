@@ -2,7 +2,7 @@
 #define DYNAMICARRAY_H
 
 #include "array.h"
-#include "Exception.h"
+#include "exception.h"
 
 namespace DTLib
 {

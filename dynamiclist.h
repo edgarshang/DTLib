@@ -1,8 +1,8 @@
 #ifndef DYNAMICLIST_H
 #define DYNAMICLIST_H
 
-#include "Seqlish.h"
-#include "Exception.h"
+#include "seqlish.h"
+#include "exception.h"
 namespace DTLib
 {
 template <typename T>

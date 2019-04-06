@@ -1,8 +1,8 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include "Object.h"
-#include "Exception.h"
+#include "object.h"
+#include "exception.h"
 namespace DTLib
 {
 template  <typename T>

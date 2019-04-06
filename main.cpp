@@ -1,210 +1,45 @@
 #include <iostream>
-#include "Smartpointer.h"
-#include "Exception.h"
-#include "Object.h"
-#include "Seqlish.h"
-#include "Staticlist.h"
-#include "Dynamiclist.h"
-#include "staticarray.h"
+#include "smartpointer.h"
+#include "exception.h"
+#include "object.h"
+#include "seqlish.h"
+#include "staticlist.h"
+#include "dynamiclist.h"
+#include "staticArray.h"
 #include "dynamicarray.h"
+#include "linklist.h"
+
 
 using namespace std;
 using namespace DTLib;
 
-class TestObject : public Object
-{
-public:
-    int i;
-    int j;
-
-};
-
-class Child : public TestObject
-{
-public:
-    int k;
-};
-
-void Demo3()
-{
-    Object* obj1 = new TestObject();
-    Object* obj2 = new Child();
-
-    cout << "obj1 = " << obj1 << endl;
-    cout << "obj2 = " << obj2 << endl;
-
-    delete  obj1;
-    delete  obj2;
-}
-
-class Test
-{
-public:
-    Test()
-    {
-        cout << "Test()" << endl;
-    }
-
-    ~Test()
-    {
-        cout << "~Test()" << endl;
-    }
-};
-
-void Demo1()
-{
-    try {
-        throw 'c';
-    } catch (int)
-    {
-        cout << "catch(int i) " << endl;
-    }
-    catch (double d)
-    {
-        cout << "catch(double d)" << endl;
-    }
-    catch (char c)
-    {
-        cout << "catch(char i)" << endl;
-    }
-}
-
-
-
-int Demo2()
-{
-    try {
-      //  throw Exception("test", __FILE__, __LINE__);
-        THROW_EXCEPTION(InvalidParameterException, "test");
-    }
-    catch (const ArithmeticException& e)
-    {
-            cout << "catch(const ArithmeticException& e)" << endl;
-            cout << e.message() << endl;
-            cout << e.location() << endl;
-    }
-    catch (const InvalidParameterException& e)
-    {
-            cout << "catch(const InvalidParameterException& e)" << endl;
-            cout << e.message() << endl;
-            cout << e.location() << endl;
-    }
-    catch(const IndexOutOfBoundException& e)
-    {
-        cout << "catch(const IndexOutOfBoundException& e)" << endl;
-        cout << e.message() << endl;
-        cout << e.location() << endl;
-    }
-    catch(const NoEnoughMemoryException& e)
-    {
-        cout << "catch(const NoEnoughMemoryException& e)" << endl;
-        cout << e.message() << endl;
-        cout << e.location() << endl;
-    }
-
-    catch(const NullPointerException& e)
-    {
-        cout << "catch(const NullPointerException& e)" << endl;
-        cout << e.message() << endl;
-        cout << e.location() << endl;
-    }
-    catch (const Exception& e)
-    {
-        cout << "catch(const Exception& e)" << endl;
-        cout << e.message() << endl;
-        cout << e.location() << endl;
-    }
-
-    return 0;
-}
-
-void demo_staticArray()
-{
-    cout << "start" << endl;
-    StaticArray<int, 5> s1;
-
-    cout << "s1.length() = " << s1.length() << endl;
-    for (int i = 0; i < s1.length(); i++)
-    {
-
-        s1[i] = i*i;
-
-    }
-
-    for (int i = 0; i < s1.length(); i++)
-    {
-        cout << s1[i] << endl;
-    }
-
-    cout << "end" << endl;
-}
-
-void demo_DynamicArray()
-{
-
-    DynamicArray<int> s1(5);
-
-    cout << "s1.length() = " << s1.length() << endl;
-    for (int i = 0; i < s1.length(); i++)
-    {
-
-        s1[i] = i*i;
-
-    }
-
-    for (int i = 0; i < s1.length(); i++)
-    {
-        cout << s1[i] << endl;
-    }
-
-    cout << "end" << endl;
-}
 
 int main()
 {
-    cout << "hello" << endl;
-   // demo_staticArray();
-    demo_DynamicArray();
+     LinkList<int> list;
+
+    // cout << list.length() << endl;
 
 
-//    for (int i = 0; i < l.capacity(); i++) {
-//        l.insert(0, i);
+  //  cout << "hello, wrold" << endl;
+     for (int i = 0; i < 6; i++) {
+       //  cout << "abc" << endl;
+        list.insert(i);
 
-//    }
+     }
+      // cout << "hello, wrold" << endl;
 
-//    for (int i = 0; i < l.length(); i++) {
-//        cout << l[i] << endl;
+     for(int i = 0; i < list.length(); i++)
+     {
+         int e;
+         list.get(i, e);
+         cout << e << endl;
 
-//    }
-
-//    l[0] *= l[0];
-
-//    for (int i = 0; i < l.length(); i++) {
-//        cout << l[i] << endl;
-
-//    }
-//    try {
-//      l[5] = 5;
-//    } catch (const Exception& e) {
-//        cout << e.message() << endl;
-//        cout << e.location() << endl;
-
-//        l.resize(10);
-
-//        l.insert(5, 50);
-
-//    }
-//    for (int i = 0; i < l.length(); i++) {
-//        cout << l[i] << endl;
-
-//    }
+     }
+    //  cout << "hello, wrold" << endl;
 
 
-//    SmartPointer<int> *sp = new SmartPointer<int>();
 
-//    delete  sp;
-//    Test *test = new Test();
-//    SmartPointer<Test> t1 = new Test();
-//    SmartPointer<Exception> e1 = new ArithmeticException();
+
     return 0;
 }

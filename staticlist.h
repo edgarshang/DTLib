@@ -1,7 +1,7 @@
 #ifndef STATICLIST_H
 #define STATICLIST_H
 
-#include "Seqlish.h"
+#include "seqlish.h"
 
 
 namespace DTLib

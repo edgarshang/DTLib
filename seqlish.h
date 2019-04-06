@@ -1,8 +1,8 @@
 #ifndef SEQLISH_H
 #define SEQLISH_H
 
-#include "List.h"
-#include "Exception.h"
+#include "list.h"
+#include "exception.h"
 
 
 
