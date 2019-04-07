@@ -31,11 +31,27 @@ int main()
 
      for(int i = 0; i < list.length(); i++)
      {
-         int e;
-         list.get(i, e);
-         cout << e << endl;
+
+
+//         cout <<  list.get(i); << endl;
+         cout << list.get(i) << endl;
 
      }
+
+     list.remove(2);
+
+     cout << endl;
+
+     for(int i = 0; i < list.length(); i++)
+     {
+
+
+//         cout <<  list.get(i); << endl;
+         cout << list.get(i) << endl;
+
+     }
+
+
     //  cout << "hello, wrold" << endl;
 
 
