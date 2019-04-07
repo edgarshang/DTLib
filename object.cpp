@@ -19,6 +19,16 @@ void Object::operator delete(void* p)
     free(p);
 }
 
+bool Object::operator==(const Object &object)
+{
+    return (this == &obj);
+}
+
+bool Object::operator!=(const Object &object)
+{
+    return (this != &obj);
+}
+
 void* Object::operator new[] (unsigned long long size) throw()
 {
    // cout << "Object::operator new[]" << endl;

@@ -9,6 +9,8 @@ public:
    void* operator new (unsigned long long size) throw();
    void operator delete (void* p);
    void* operator new[] (unsigned long long size) throw();
+   bool operator == (const Object& object);
+   bool operator != (const Object& object);
    void operator delete[] (void *p);
    virtual ~Object() = 0;
 };

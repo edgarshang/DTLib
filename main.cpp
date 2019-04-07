@@ -51,6 +51,8 @@ int main()
 
      }
 
+     cout << list.find(-3) << endl;
+
 
     //  cout << "hello, wrold" << endl;
 
