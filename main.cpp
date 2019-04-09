@@ -18,46 +18,15 @@ int main()
 {
      LinkList<int> list;
 
-    // cout << list.length() << endl;
-
-
-  //  cout << "hello, wrold" << endl;
-     for (int i = 0; i < 6; i++) {
-       //  cout << "abc" << endl;
-        list.insert(i);
-
-     }
-      // cout << "hello, wrold" << endl;
-
-     for(int i = 0; i < list.length(); i++)
+     for (int i = 0; i < 5; i++)
      {
-
-
-//         cout <<  list.get(i); << endl;
-         cout << list.get(i) << endl;
-
+        list.insert(0, i);
      }
 
-     list.remove(2);
-
-     cout << endl;
-
-     for(int i = 0; i < list.length(); i++)
+     for (list.move(0); !list.end(); list.next())
      {
-
-
-//         cout <<  list.get(i); << endl;
-         cout << list.get(i) << endl;
-
+            cout << list.current() << endl;
      }
-
-     cout << list.find(-3) << endl;
-
-
-    //  cout << "hello, wrold" << endl;
-
-
-
 
     return 0;
 }

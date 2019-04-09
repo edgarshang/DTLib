@@ -21,12 +21,12 @@ void Object::operator delete(void* p)
 
 bool Object::operator==(const Object &object)
 {
-    return (this == &obj);
+    return (this == &object);
 }
 
 bool Object::operator!=(const Object &object)
 {
-    return (this != &obj);
+    return (this != &object);
 }
 
 void* Object::operator new[] (unsigned long long size) throw()
