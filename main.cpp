@@ -8,6 +8,7 @@
 #include "staticArray.h"
 #include "dynamicarray.h"
 #include "linklist.h"
+#include "staticlinklist.h"
 
 
 using namespace std;
@@ -16,7 +17,7 @@ using namespace DTLib;
 
 int main()
 {
-     LinkList<int> list;
+     Staticlinklist<int, 7> list;
 
      for (int i = 0; i < 5; i++)
      {
