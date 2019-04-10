@@ -51,6 +51,7 @@ protected:
             {
                 m_used[i] = 0;
                 psn->~SNode();
+                break;
             }
         }
     }
@@ -67,6 +68,11 @@ public:
     int capacity()
     {
         return N;
+    }
+
+    ~Staticlinklist()
+    {
+        this->clear();
     }
 };
 
