@@ -10,24 +10,31 @@
 #include "linklist.h"
 #include "staticlinklist.h"
 
-
 using namespace std;
 using namespace DTLib;
+
+class Test : public Object
+{
+public:
+    Test()
+    {
+        cout << "Test()" << endl;
+    }
+    ~Test()
+    {
+        cout << "~Test()" << endl;
+    }
+};
+
+
+
 
 
 int main()
 {
-     Staticlinklist<int, 7> list;
+   SmartPointer<Test> sp = new Test();
+   SmartPointer<Test> spn;
 
-     for (int i = 0; i < 5; i++)
-     {
-        list.insert(0, i);
-     }
-
-     for (list.move(0); !list.end(); list.next())
-     {
-            cout << list.current() << endl;
-     }
-
+   spn = sp;
     return 0;
 }
