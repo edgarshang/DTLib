@@ -1,28 +1,25 @@
-#ifndef LINKLIST_H
-#define LINKLIST_H
+#ifndef DUALINKLIST_H
+#define DUALINKLIST_H
 
 #include "list.h"
-#include "exception.h"
-#include <iostream>
-
-
 
 namespace DTLib
 {
-
-template < typename T >
-class LinkList : public List<T>
-{
-protected:
+    template <typename T>
+    class DuaLinkList: public List<T>
+    {
+        protected:
     struct Node : public Object
     {
         T value;
+        Node* pre;
         Node* next;
     };
 
     mutable struct : public Object
     {
         char reserved[sizeof(T)];
+        Node* pre;
         Node* next;
     }m_header;
     int m_length;
@@ -51,7 +48,7 @@ protected:
         delete pn;
     }
 public:
-    LinkList()
+    DuaLinkList()
     {
         m_header.next = nullptr;
         m_length = 0;
@@ -95,11 +92,25 @@ public:
             {
 
                 Node *current = position(i);
+                Node* next = current->next;
 
                 node->value = e;
+
                 node->next = current->next;
                 current->next = node;
 
+                if( current != reinterpret_cast<Node*>(&m_header))
+                {
+                    node->pre = current;
+                }else
+                {
+                    node->pre = nullptr;
+                }
+
+                if (next != nullptr)
+                {
+                    next->pre = node;
+                }
                  m_length++;
             }else
             {
@@ -123,16 +134,23 @@ public:
         {
             Node *current = position(i);
             Node* toDel = current->next;
+            Node* next = toDel->next;
+
+
             if (m_current == toDel)
             {
-               m_current = toDel->next;
+               m_current = next;
             }
 
-            current->next = toDel->next;
+            current->next = next;
+            if (next != nullptr)
+            {
+                next->pre = toDel->pre;
+            }
 
             m_length--;
+
             destory(toDel);
-            
         }
 
         return  ret;
@@ -180,16 +198,12 @@ public:
 
     void clear()
     {
-        while (m_header.next)
+        while (m_length > 0)
         {
-            Node* toDel = m_header.next;
-
-            m_header.next = toDel->next;
-
-            destory(toDel);
+            remove(0);
         }
 
-        m_length = 0;
+
     }
 
     virtual bool move(int i, int step = 1)
@@ -227,6 +241,7 @@ public:
 
         while ((i < m_step)&& !end())
         {
+            std::cout << "m_step = " << m_step << std::endl;
             m_current = m_current->next;
             i++;
         }
@@ -234,13 +249,24 @@ public:
         return ( i == m_step );
     }
 
-    ~LinkList()
+    virtual bool pre()
+    {
+        int i = 0;
+        while((i < m_step) && !end())
+        {
+            m_current = m_current->pre;
+            i++;
+        }
+
+        return (i==m_step);
+    }
+
+    ~DuaLinkList()
     {
         clear();
     }
 
-    // .....
-};
-}
 
-#endif // LINKLIST_H
+    };
+}
+#endif // DUALINKLIST_H

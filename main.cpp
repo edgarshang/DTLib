@@ -1,5 +1,6 @@
 #include <iostream>
 #include "circlelist.h"
+#include "dualinklist.h"
 
 using namespace std;
 using namespace DTLib;
@@ -20,18 +21,35 @@ void josephus(int n, int s, int m)
     {
         cl.next();
 
-        cout <<cl.current() << " ";
+        cout <<cl.current() << endl;
 
-        cout << cl.find(cl.current()) << endl;
-        cl.remove(cl.find(cl.current()));
-        // cl.m_current++;
-    }
+       cl.remove(cl.find(cl.current()));
+     }
 }
 
 
 
 int main()
 {
-    josephus(41, 1,3);
+    DuaLinkList<int> dl;
+
+    for (int i = 0; i < 5; ++i)
+    {
+        dl.insert(0, i);
+    }
+
+    for (int i = 0; i < dl.length(); ++i)
+    {
+        cout << dl.get(i) << endl;
+    }
+
+    cout << "begin" << endl;
+
+    for (dl.move(dl.length() - 1); !dl.end(); dl.pre())
+    {
+        cout <<dl.current() << endl;
+    }
+
+    cout <<"end" <<endl;
    return 0;
 }
