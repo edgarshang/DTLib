@@ -122,11 +122,17 @@ public:
         if( ret )
         {
             Node *current = position(i);
+            std::cout << "before current->value = " << current->next->value << std::endl;;
 
             Node* toDel = current->next;
             current->next = toDel->next;
 
+            std::cout << "toDel->value = " << toDel->value << std::endl;;
+            std::cout << "current->value = " << current->next->value << std::endl;;
+
             destory(toDel);
+
+
 
             m_length--;
         }
@@ -146,7 +152,7 @@ public:
         return  ret;
     }
 
-    T get(int i) const
+    virtual T get(int i) const
     {
         T ret;
         if (get(i, ret))
@@ -188,7 +194,7 @@ public:
         m_length = 0;
     }
 
-    int move(int i, int step = 1)
+    virtual bool move(int i, int step = 1)
     {
         bool ret = ( 0 <= i ) && ( i < m_length ) && (step > 0);
 
@@ -201,12 +207,12 @@ public:
         return ret;
     }
 
-    bool end()
+    virtual bool end()
     {
         return (m_current == nullptr);
     }
 
-    T current()
+    virtual T current()
     {
         if(!end() )
         {
@@ -217,12 +223,13 @@ public:
         }
     }
 
-    bool next()
+    virtual bool next()
     {
         int i = 0;
 
-        while ((i <  m_step)&& !end())
+        while ((i < m_step)&& !end())
         {
+            std::cout << "m_step = " << m_step << std::endl;
             m_current = m_current->next;
             i++;
         }

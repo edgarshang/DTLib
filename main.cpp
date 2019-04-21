@@ -1,40 +1,37 @@
 #include <iostream>
-#include "smartpointer.h"
-#include "exception.h"
-#include "object.h"
-#include "seqlish.h"
-#include "staticlist.h"
-#include "dynamiclist.h"
-#include "staticArray.h"
-#include "dynamicarray.h"
-#include "linklist.h"
-#include "staticlinklist.h"
+#include "circlelist.h"
 
 using namespace std;
 using namespace DTLib;
 
-class Test : public Object
+
+void josephus(int n, int s, int m)
 {
-public:
-    Test()
-    {
-        cout << "Test()" << endl;
-    }
-    ~Test()
-    {
-        cout << "~Test()" << endl;
-    }
-};
+    CircleList<int> cl;
 
+    for (int i = 1; i <= n; i++)
+    {
+        cl.insert(i);
+    }
 
+    cl.move(s-1, m-1 );
+
+    while (cl.length() > 0)
+    {
+        cl.next();
+
+        cout <<cl.current() << " ";
+
+        cout << cl.find(cl.current()) << endl;
+        cl.remove(cl.find(cl.current()));
+        // cl.m_current++;
+    }
+}
 
 
 
 int main()
 {
-   SmartPointer<Test> sp = new Test();
-   SmartPointer<Test> spn;
-
-   spn = sp;
-    return 0;
+    josephus(41, 1,3);
+   return 0;
 }
