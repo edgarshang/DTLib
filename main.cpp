@@ -1,6 +1,7 @@
 #include <iostream>
 #include "circlelist.h"
 #include "dualinklist.h"
+#include "staticstack.h"
 
 using namespace std;
 using namespace DTLib;
@@ -31,25 +32,12 @@ void josephus(int n, int s, int m)
 
 int main()
 {
-    DuaLinkList<int> dl;
+   StaticStack<int, 5> l;
 
-    for (int i = 0; i < 5; ++i)
-    {
-        dl.insert(0, i);
-    }
+   for (int i = 0; i < 8; i++)
+   {
+        l.push(i);
+   }
 
-    for (int i = 0; i < dl.length(); ++i)
-    {
-        cout << dl.get(i) << endl;
-    }
-
-    cout << "begin" << endl;
-
-    for (dl.move(dl.length() - 1); !dl.end(); dl.pre())
-    {
-        cout <<dl.current() << endl;
-    }
-
-    cout <<"end" <<endl;
    return 0;
 }
