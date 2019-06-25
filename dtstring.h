@@ -13,7 +13,14 @@ protected:
     void init(const char* s);
 public:
     String();
+    String(char c);
     String(const char* s);
+    String(const String& s);
+
+    int length() const;
+    const char* str() const;
+
+    ~String();
 };
 
 }
