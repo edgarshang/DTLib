@@ -20,6 +20,33 @@ public:
     int length() const;
     const char* str() const;
 
+    bool operator == (const String& s) const;
+    bool operator == (const char* s) const;
+
+    bool operator != (const String& s) const;
+    bool operator != (const char* s) const;
+
+    bool operator > (const String& s) const;
+    bool operator > (const char* s) const;
+
+    bool operator < (const String& s) const;
+    bool operator < (const char* s) const;
+
+    bool operator <= (const String& s) const;
+    bool operator <= (const char* s) const;
+
+    bool operator >= (const String& s) const;
+    bool operator >= (const char* s) const;
+
+    String operator +(const String& s) const;
+    String operator +(const char* s) const;
+
+    String operator +=(const String& s) const;
+    String operator +=(const char* s) const;
+
+    String& operator = (const String& s);
+    String& operator = (const char *s);
+    String& operator = (char c);
     ~String();
 };
 
