@@ -2,7 +2,10 @@
 #define SORT_H
 
 #include "object.h"
+#include "array.h"
 #include <iostream>
+
+using namespace DTLib;
 
 namespace DTLib
 {
@@ -243,7 +246,41 @@ public:
         Quick(array, 0, len -1, min2max);
     }
 
+    template<typename T>
+    static void Select(Array<T>& array, bool min2max = true)
+    {
+        Select(array.array(), array.length(), min2max);
+    }
 
+    template<typename T>
+    static void Quick(Array<T>& array, bool min2max = true)
+    {
+        Quick(array.array(), array.length(), min2max);
+    }
+
+    template<typename T>
+    static void Bubble(Array<T>& array, bool min2max = true)
+    {
+        Bubble(array.array(), array.length(), min2max);
+    }
+
+    template<typename T>
+    static void Shell(Array<T>& array, bool min2max = true)
+    {
+        Shell(array.array(), array.length(), min2max);
+    }
+
+    template<typename T>
+    static void Insert(Array<T>& array, bool min2max = true)
+    {
+        Insert(array.array(), array.length(), min2max);
+    }
+
+    template<typename T>
+    static void Merge(Array<T>& array, bool min2max = true)
+    {
+        Merge(array.array(), array.length(), min2max);
+    }
 };
 }
 

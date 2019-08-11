@@ -48,6 +48,11 @@ public:
         return (const_cast<Array<T>&>(*this))[i];
     }
 
+    T* array() const
+    {
+        return m_array;
+    }
+
     virtual int length() const = 0;
 };
 }
