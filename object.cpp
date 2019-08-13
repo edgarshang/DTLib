@@ -7,7 +7,7 @@ using namespace std;
 namespace DTLib {
 
 
-void* Object::operator new(unsigned long long size) throw()
+void* Object::operator new(long unsigned int size) throw()
 {
    // cout << "Object::operator new size = " << size << endl;
     return malloc(size);
@@ -29,7 +29,7 @@ bool Object::operator!=(const Object &object)
     return (this != &object);
 }
 
-void* Object::operator new[] (unsigned long long size) throw()
+void* Object::operator new[] (long unsigned int size) throw()
 {
    // cout << "Object::operator new[]" << endl;
     return malloc(size);
