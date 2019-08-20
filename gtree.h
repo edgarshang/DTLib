@@ -4,6 +4,7 @@
 #include "treenode.h"
 #include "tree.h"
 #include "gtreenode.h"
+#include "exception.h"
 
 namespace DTLib
 {
@@ -53,13 +54,48 @@ public:
     bool insert(TreeNode<T>* node)
     {
         bool ret = true;
-       find(dynamic_cast<GTreeNode<T>*>(node), 0);
+
+        if( node != nullptr )
+        {
+            if(this->m_root == nullptr)
+            {
+                node->parent = nullptr;
+                this->m_root = node;
+            }else {
+                GTreeNode<T>* np = find(node->parent);
+                if(np != nullptr)
+                {
+                    GTreeNode<T>* n = dynamic_cast<GTreeNode<T>*>(node);
+
+                    if( np->child.find(n) < 0)
+                    {
+                        np->child.insert(n);
+                    }
+                }else {
+                    THROW_EXCEPTION(InvalidOperationException, "Invalid parent tree node...");
+                }
+            }
+
+        }else {
+                THROW_EXCEPTION(InvalidParameterException, "parameter node cannot be NULL...");
+        }
+
         return ret;
     }
     bool insert(const T& value, TreeNode<T>* parent)
     {
         bool ret = true;
-         find(dynamic_cast<GTreeNode<T>*>(parent), value);
+        GTreeNode<T>* node = new GTreeNode<T>();
+
+        if( node != nullptr )
+        {
+            node->value = value;
+            node->parent = parent;
+
+            insert(node);
+        }else {
+            THROW_EXCEPTION(NoEnoughMemoryException, "No memery to create new tree node...");
+        }
 
         return ret;
     }
