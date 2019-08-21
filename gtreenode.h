@@ -11,6 +11,32 @@ class GTreeNode : public TreeNode<T>
 {
 public:
     LinkList<GTreeNode<T>*> child;
+    GTreeNode()
+    {
+        m_flag = false;
+    }
+protected:
+    bool m_flag;
+
+    void * operator new(unsigned long long size) throw()
+    {
+        return Object::operator new(size);
+    }
+
+    bool flag()
+    {
+        return m_flag;
+    }
+
+    static GTreeNode<T>* NewNode()
+    {
+        GTreeNode<T>* ret = new GTreeNode<T>();
+
+        if(ret != nullptr)
+        {
+            ret->m_flag = true;
+        }
+    }
 };
 }
 
