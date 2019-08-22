@@ -18,7 +18,7 @@ public:
 protected:
     bool m_flag;
 
-    void * operator new(unsigned long long size) throw()
+    void * operator new(long unsigned int size) throw()
     {
         return Object::operator new(size);
     }
