@@ -5,6 +5,7 @@
 #include "tree.h"
 #include "gtreenode.h"
 #include "exception.h"
+#include "linkqueue.h"
 
 namespace DTLib
 {
@@ -12,6 +13,11 @@ template <typename T>
 class GTree : public Tree<T>
 {
 protected:
+
+    LinkQueue<GTreeNode<T>*> m_queue;
+
+    GTree(const GTree<T>&);
+    GTree<T>& operator=(const GTree<T>&);
     GTreeNode<T>* find(GTreeNode<T>* node, const T& value) const
     {
         GTreeNode<T>* ret = nullptr;
@@ -148,6 +154,11 @@ protected:
         return ret;
     }
 public:
+
+    GTree()
+    {
+
+    }
     bool insert(TreeNode<T>* node)
     {
         bool ret = true;
@@ -207,6 +218,7 @@ public:
        }
        else {
            remove(node, ret);
+           m_queue.clear();
        }
 
        return ret;
@@ -222,6 +234,7 @@ public:
         }
         else {
             remove(dynamic_cast<GTreeNode<T>*>(node), ret);
+            m_queue.clear();
         }
 
         return ret;
@@ -257,11 +270,52 @@ public:
    {
        free(root());
         this->m_root = nullptr;
+
+       m_queue.clear();
    }
 
-   GTree()
+   bool begin()
    {
+       bool ret = (root() != nullptr);
+       if( ret )
+       {
+            m_queue.clear();
+            m_queue.add(root());
+       }
 
+       return ret;
+   }
+
+   bool end()
+   {
+       return (m_queue.length() == 0);
+   }
+
+   bool next()
+   {
+       bool ret = (m_queue.length() > 0);
+       if( ret )
+       {
+         GTreeNode<T>* node = m_queue.front();
+
+         m_queue.remove();
+
+         for(node->child.move(0); !node->child.end(); node->child.next())
+         {
+             m_queue.add(node->child.current());
+         }
+       }
+
+   }
+
+   T current()
+   {
+       if(!end())
+       {
+           return m_queue.front()->value;
+       }else {
+            THROW_EXCEPTION(InvalidOperationException, "No value at current position...");
+        }
    }
 
    ~GTree()
