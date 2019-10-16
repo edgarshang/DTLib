@@ -11,6 +11,9 @@ class Tree : public Object
 {
 protected:
     TreeNode<T>* m_root;
+
+    Tree(const Tree<T>&);
+   Tree<T>& operator=(const Tree<T>&);
 public:
     Tree(){ m_root = nullptr;}
     virtual bool insert(TreeNode<T>* node) = 0;
@@ -24,6 +27,10 @@ public:
     virtual int count() const = 0;
     virtual int height() const = 0;
     virtual void clear() const = 0;
+    virtual ~Tree()
+    {
+        m_root = nullptr;
+    }
 };
 }
 

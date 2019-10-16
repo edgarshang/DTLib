@@ -6,9 +6,9 @@ namespace DTLib
 class Object
 {
 public:
-   void* operator new (long unsigned int size) throw();
+   void* operator new (long long unsigned int size) throw();
    void operator delete (void* p);
-   void* operator new[] (long unsigned int size) throw();
+   void* operator new[] (long long unsigned int size) throw();
    bool operator == (const Object& object);
    bool operator != (const Object& object);
    void operator delete[] (void *p);

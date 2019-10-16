@@ -9,27 +9,9 @@ namespace DTLib
 template <typename T>
 class GTreeNode : public TreeNode<T>
 {
+
 public:
     LinkList<GTreeNode<T>*> child;
-
-    GTreeNode()
-    {
-        m_flag = false;
-    }
-protected:
-    bool m_flag;
-    GTreeNode(GTreeNode<T>&);
-    GTreeNode<T>& operator = (const GTreeNode<T>&);
-
-    void * operator new(long long unsigned int size) throw()
-    {
-        return Object::operator new(size);
-    }
-
-    bool flag()
-    {
-        return m_flag;
-    }
 
     static GTreeNode<T>* NewNode()
     {
