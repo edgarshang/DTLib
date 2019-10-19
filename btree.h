@@ -8,13 +8,24 @@
 #include "linkqueue.h"
 
 #include "btreenode.h"
+#include "array.h"
+#include "dynamicarray.h"
 
 namespace DTLib
 {
+
+enum BTTraveral
+{
+    PreOrder,
+    IndOrder,
+    PostOrder
+};
+
 template <typename T>
 class BTree : public Tree<T>
 {
 protected:
+    LinkQueue<BTreeNode<T>*> m_queue;
     virtual BTreeNode<T>* find(BTreeNode<T>* node, const T& value)const
     {
         BTreeNode<T>* ret = nullptr;
@@ -147,6 +158,86 @@ protected:
             }
         }
     }
+
+    int count(BTreeNode<T>* node) const
+    {
+//        int ret = 0;
+//        if(node != nullptr)
+//        {
+//            ret = count(node->left) + count(node->right) + 1;
+//        }
+
+//        return ret;
+        return (node != nullptr) ? (count(node->left) + count(node->right) + 1) : (0);
+    }
+
+    int height(BTreeNode<T>* node) const
+    {
+        int ret = 0;
+        if(node != nullptr)
+        {
+            int lh = height(node->left);
+            int rh = height(node->right);
+
+            ret = ((lh > rh) ? lh : rh) + 1;
+        }
+        return ret;
+    }
+
+    int degree(BTreeNode<T>* node) const
+    {
+        int ret = 0;
+        // 因为二叉树的最大度为2，所以只要检测到有一个节点的子节点数为2，就可以判定这棵树的度为2
+        if(node != nullptr)
+        {
+            BTreeNode<T>* chile[] = {node->left, node->right};
+             ret = (!!node->left + !!node->right);
+
+             for(int i = 0; (i<2)&&(ret < 2); i++)
+             {
+                 int d = degree(chile[i]);
+                 if( ret < d )
+                 {
+                     ret = d;
+                 }
+             }
+
+        }
+
+        return ret;
+    }
+
+    void preOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+    {
+        if(node != nullptr)
+        {
+            queue.add(node);
+            preOrderTraversal(node->left, queue);
+            preOrderTraversal(node->right, queue);
+        }
+    }
+
+    void inOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+    {
+        if(node != nullptr)
+        {
+            inOrderTraversal(node->left, queue);
+            queue.add(node);
+            inOrderTraversal(node->right, queue);
+        }
+    }
+
+    void postOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+    {
+        if(node != nullptr)
+        {
+            postOrderTraversal(node->left, queue);
+            postOrderTraversal(node->right, queue);
+            queue.add(node);
+        }
+    }
+
+
 public:
      bool insert(TreeNode<T>* node)
      {
@@ -218,6 +309,7 @@ public:
 
          }else {
              remove(node, ret);
+             m_queue.clear();
          }
 
          return ret;
@@ -234,6 +326,7 @@ public:
 
          }else {
              remove(dynamic_cast<BTreeNode<T>*>(node), ret);
+             m_queue.clear();
          }
          return ret;
      }
@@ -251,21 +344,105 @@ public:
      }
      int degree() const
      {
-         return 0;
+         return degree(root());
      }
      int count() const
      {
-         return 0;
+         return count(root());
      }
      int height()
      {
-         return 0;
+         return height(root());
      }
      void clear()
      {
          free(root());
+         m_queue.clear();
          this->m_root = nullptr;
      }
+
+     bool begin()
+     {
+         bool ret = (root() != nullptr);
+         if( ret )
+         {
+              m_queue.clear();
+              m_queue.add(root());
+         }
+
+         return ret;
+     }
+
+     bool end()
+     {
+         return (m_queue.length() == 0);
+     }
+
+     bool next()
+     {
+         bool ret = (m_queue.length() > 0);
+         if( ret )
+         {
+           BTreeNode<T>* node = m_queue.front();
+
+           m_queue.remove();
+
+           if(node->left != nullptr)
+           {
+               m_queue.add(node->left);
+           }
+           if(node->right != nullptr)
+           {
+               m_queue.add((node->right));
+           }
+
+         }
+
+     }
+
+     T current()
+     {
+         if(!end())
+         {
+             return m_queue.front()->value;
+         }else {
+              THROW_EXCEPTION(InvalidOperationException, "No value at current position...");
+          }
+     }
+
+     SharedPointer<Array<T>> traversal( BTTraveral order)
+     {
+        DynamicArray<T>* ret  = nullptr;
+        LinkQueue<BTreeNode<T>*> queue;
+        switch (order) {
+        case PreOrder:
+            preOrderTraversal(root(), queue);
+            break;
+        case IndOrder:
+            inOrderTraversal(root(), queue);
+            break;
+        case PostOrder:
+            postOrderTraversal(root(), queue);
+            break;
+        default:
+            THROW_EXCEPTION(InvalidParameterException,"Parameter order is invalid...");
+            break;
+        }
+
+        ret = new DynamicArray<T>(queue);
+
+        if( ret != nullptr )
+        {
+            for (int i = 0; i < ret->length(); ++i) {
+                ret->set(i, queue.front()->value);
+            }
+        }else {
+            THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create return array...");
+        }
+        return  ret;
+     }
+
+
      ~BTree()
     {
        clear();

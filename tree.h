@@ -27,6 +27,10 @@ public:
     virtual int count() const = 0;
     virtual int height() const = 0;
     virtual void clear() const = 0;
+    virtual bool begin() = 0;
+    virtual bool end() = 0;
+    virtual bool next() = 0;
+    virtual T current() = 0;
     virtual ~Tree()
     {
         m_root = nullptr;
